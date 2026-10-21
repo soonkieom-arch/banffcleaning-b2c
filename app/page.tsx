@@ -78,8 +78,9 @@ export default function B2CHome() {
             <a href="#process" className="hover:text-[#1E3653] transition-colors hidden md:inline">작업 공정</a>
             
             {/* 반응형 네이버 블로그 메뉴 링크 (모바일: '블로그', PC: '네이버 블로그') */}
+            {/* 네이버 블로그 메뉴 링크 */}
             <a 
-              href="https://blog.naver.com/banffcleanning" 
+              href="https://m.blog.naver.com/PostList.naver?blogId=banffcleanning" 
               target="_blank" 
               rel="noreferrer" 
               className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700 transition-colors font-bold px-1 py-1"
