@@ -21,18 +21,22 @@ export default function B2CHome() {
     memo: ''
   });
 
-  // 동영상 자동재생 강제 적용을 위한 Ref
+  // 동영상 실제 재생 여부 상태 (정지 화면 노출 방지용)
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
+  // 동영상 강제 재생 및 Muted 처리용 Ref
   const bgVideoRef = useRef<HTMLVideoElement>(null);
   const fgVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // 모바일 브라우저 접속 시 즉시 동영상 재생 시도
-    if (bgVideoRef.current) {
-      bgVideoRef.current.play().catch(() => {});
-    }
-    if (fgVideoRef.current) {
-      fgVideoRef.current.play().catch(() => {});
-    }
+    // 모바일 브라우저 음소거 및 재생 강제 실행
+    [bgVideoRef.current, fgVideoRef.current].forEach((video) => {
+      if (video) {
+        video.defaultMuted = true;
+        video.muted = true;
+        video.play().catch(() => {});
+      }
+    });
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -80,7 +84,7 @@ export default function B2CHome() {
         </div>
       </header>
 
-      {/* 2. 히어로 섹션 (모바일 바로 재생 최적화 동영상) */}
+      {/* 2. 히어로 섹션 (동영상 재생 순간 부드럽게 페이드인 적용) */}
       <section className="relative w-full h-[85vh] min-h-[600px] bg-slate-950 flex items-center justify-center overflow-hidden">
         
         {/* (1) 배경 layer: 블러 동영상 */}
@@ -91,8 +95,9 @@ export default function B2CHome() {
           muted
           playsInline
           preload="auto"
-          poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-          className="absolute inset-0 w-full h-full object-cover filter blur-3xl opacity-40 scale-110 z-0"
+          className={`absolute inset-0 w-full h-full object-cover filter blur-3xl opacity-40 scale-110 z-0 transition-opacity duration-700 ${
+            isVideoLoaded ? 'opacity-40' : 'opacity-0'
+          }`}
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
@@ -100,7 +105,7 @@ export default function B2CHome() {
         {/* (2) 어두운 반투명 오버레이 */}
         <div className="absolute inset-0 bg-slate-950/50 z-10" />
 
-        {/* (3) 전면 layer: 잘림 없는 원본 비율 동영상 */}
+        {/* (3) 전면 layer: 원본 비율 동영상 (실제 재생 시 페이드인) */}
         <div className="absolute inset-0 z-10 flex items-center justify-center p-4">
           <div className="h-full max-h-[520px] aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl border border-white/20 bg-slate-900">
             <video
@@ -110,8 +115,10 @@ export default function B2CHome() {
               muted
               playsInline
               preload="auto"
-              poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-              className="w-full h-full object-cover"
+              onPlaying={() => setIsVideoLoaded(true)}
+              className={`w-full h-full object-cover transition-opacity duration-500 ${
+                isVideoLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
             >
               <source src="/hero-bg.mp4" type="video/mp4" />
               브라우저가 동영상 재생을 지원하지 않습니다.
