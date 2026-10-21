@@ -9,15 +9,14 @@ import {
   Sparkles, 
   ShieldCheck, 
   Zap,
-  ChevronRight,
-  Phone
+  BookOpen
 } from 'lucide-react';
 
 export default function B2CHome() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    service: '에어컨 분해청소',
+    service: '매트리스/소파 케어',
     region: '서울/경기 전지역',
     memo: ''
   });
@@ -29,7 +28,7 @@ export default function B2CHome() {
       return;
     }
     alert(`[신청 완료] ${formData.name}님, 담당 전문 엔지니어가 빠른 시간 내에 연락드리겠습니다.`);
-    setFormData({ name: '', phone: '', service: '에어컨 분해청소', region: '서울/경기 전지역', memo: '' });
+    setFormData({ name: '', phone: '', service: '매트리스/소파 케어', region: '서울/경기 전지역', memo: '' });
   };
 
   return (
@@ -44,56 +43,111 @@ export default function B2CHome() {
               BANFF CLEANING <span className="text-xs font-semibold bg-[#8FD3D5] text-[#1E3653] px-2 py-0.5 rounded-full ml-1">HOMECARE</span>
             </span>
           </div>
+          
           <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm font-semibold">
             <a href="#services" className="hover:text-[#1E3653] transition-colors hidden md:inline">서비스 안내</a>
             <a href="#process" className="hover:text-[#1E3653] transition-colors hidden md:inline">작업 공정</a>
+            
+            {/* 네이버 블로그 메뉴 링크 */}
+            <a 
+              href="https://blog.naver.com/본인_네이버_아이디" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="hidden md:flex items-center gap-1 text-emerald-600 hover:text-emerald-700 transition-colors font-bold"
+            >
+              <BookOpen className="w-4 h-4" />
+              <span>네이버 블로그</span>
+            </a>
+
             <a href="#quote" className="bg-[#1E3653] text-white px-4 py-2 rounded-xl hover:bg-[#2a4a70] transition-all shadow-sm">
-              무료 방문견적 신청
+              방문견적 신청
             </a>
           </div>
         </div>
       </header>
 
-      {/* 2. 히어로 섹션 */}
-      <section className="bg-gradient-to-br from-[#1E3653] via-[#244266] to-[#0f1f33] text-white py-16 sm:py-24 px-4 relative overflow-hidden">
-        <div className="max-w-5xl mx-auto text-center space-y-6 relative z-10">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full text-xs sm:text-sm text-[#8FD3D5] font-medium">
-            <Sparkles className="w-4 h-4" /> 프리미엄 친환경 가전/홈케어 전문 브랜드
+      {/* 2. 히어로 섹션 (동영상 이중 블러 배경 레이아웃) */}
+      <section className="relative w-full h-[85vh] min-h-[600px] bg-slate-950 flex items-center justify-center overflow-hidden">
+        
+        {/* (1) 배경 layer: 블러 동영상 */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover filter blur-3xl opacity-40 scale-110 z-0"
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
+
+        {/* (2) 어두운 반투명 오버레이 */}
+        <div className="absolute inset-0 bg-slate-950/50 z-10" />
+
+        {/* (3) 전면 layer: 원본 비율 동영상 */}
+        <div className="absolute inset-0 z-10 flex items-center justify-center p-4">
+          <div className="h-full max-h-[520px] aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl border border-white/20">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            >
+              <source src="/hero-bg.mp4" type="video/mp4" />
+              브라우저가 동영상 재생을 지원하지 않습니다.
+            </video>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-extrabold leading-tight tracking-tight">
-            우리 집 숨쉬는 공기부터 달라집니다 <br className="hidden sm:inline" />
-            <span className="text-[#8FD3D5]">100% 완전 분해 고압 세척</span> 케어
-          </h1>
-          <p className="text-slate-300 text-sm sm:text-lg max-w-2xl mx-auto font-light leading-relaxed">
-            보이지 않는 곳의 곰팡이와 유해세균까지 완전 제거. <br />
-            전문 엔지니어의 정밀 종합 진단과 책임 A/S를 약속드립니다.
-          </p>
+        </div>
+
+        {/* (4) 최상단 텍스트 및 상담 버튼 */}
+        <div className="relative z-20 max-w-5xl mx-auto px-6 w-full text-white flex flex-col items-center sm:items-start text-center sm:text-left space-y-6">
+          <div className="inline-flex items-center gap-2 bg-black/60 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest text-[#8FD3D5] uppercase shadow-md">
+            <Sparkles className="w-4 h-4" /> THE CARE YOU CAN SEE
+          </div>
           
-          {/* 주요 상담 버튼 모음 */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <h1 className="text-3xl sm:text-6xl font-black leading-tight tracking-tight drop-shadow-lg">
+            보이지 않는 틈까지, <br />
+            <span className="text-[#8FD3D5]">온전히.</span>
+          </h1>
+          
+          <p className="text-slate-100 text-sm sm:text-lg max-w-xl font-light leading-relaxed drop-shadow-md">
+            과정과 결과로 보여드리는 섬세한 케어. <br className="hidden sm:inline" />
+            소파·매트리스·카펫부터 세탁기·에어컨 분해세척까지.
+          </p>
+
+          {/* 상담 및 이동 버튼 모음 */}
+          <div className="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-3">
             <a 
-              href="http://pf.kakao.com/_KdxgrX" 
+              href="https://pf.kakao.com" 
               target="_blank" 
               rel="noreferrer" 
-              className="w-full sm:w-auto px-6 py-3.5 bg-[#FEE500] text-[#191919] font-bold rounded-2xl shadow-md hover:brightness-95 transition-all flex items-center justify-center gap-2 text-sm"
+              className="px-6 py-3.5 bg-[#FEE500] text-[#191919] font-extrabold rounded-xl shadow-2xl hover:scale-105 transition-all flex items-center gap-2 text-sm"
             >
-              <MessageCircle className="w-5 h-5 fill-[#191919]" /> 카카오톡 1:1 상담
+              <MessageCircle className="w-5 h-5 fill-[#191919]" />
+              <span>카카오톡 예약·문의 ➔</span>
             </a>
             <a 
-              href="https://talk.naver.com/profile/wzb7nyu" 
+              href="https://talk.naver.com" 
               target="_blank" 
               rel="noreferrer" 
-              className="w-full sm:w-auto px-6 py-3.5 bg-[#03CF5D] text-white font-bold rounded-2xl shadow-md hover:brightness-95 transition-all flex items-center justify-center gap-2 text-sm"
+              className="px-6 py-3.5 bg-[#03CF5D] text-white font-extrabold rounded-xl shadow-2xl hover:scale-105 transition-all flex items-center gap-2 text-sm"
             >
-              <MessageSquare className="w-5 h-5 fill-white" /> 네이버 톡톡 문의
+              <MessageSquare className="w-5 h-5 fill-white" />
+              <span>네이버 톡톡 문의</span>
             </a>
             <a 
-              href="#quote" 
-              className="w-full sm:w-auto px-6 py-3.5 bg-[#8FD3D5] text-[#1E3653] font-extrabold rounded-2xl shadow-lg hover:bg-[#a6e2e4] transition-all text-center text-sm"
+              href="#services" 
+              className="px-6 py-3.5 bg-black/40 backdrop-blur-md border border-white/30 text-white font-bold rounded-xl hover:bg-black/60 transition-all text-sm"
             >
-              간편 견적받기 ➔
+              서비스 살펴보기를 ↓
             </a>
           </div>
+        </div>
+
+        {/* (5) 하단 실시간 출장 케어 안내 */}
+        <div className="absolute bottom-4 left-6 z-20 text-[11px] text-slate-300 font-medium tracking-wider hidden sm:flex items-center gap-2 bg-black/60 px-3.5 py-1.5 rounded-full border border-white/10 backdrop-blur-md">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          BANFF CLEANING HOMECARE · 서울·경기 출장 케어
         </div>
       </section>
 
@@ -119,7 +173,7 @@ export default function B2CHome() {
         </div>
       </section>
 
-      {/* 4. 서비스 품목 */}
+      {/* 4. 서비스 품목 (매트리스/패브릭 케어를 맨 왼쪽 첫 번째로 이동) */}
       <section id="services" className="py-16 px-4 max-w-6xl mx-auto space-y-10">
         <div className="text-center space-y-2">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E3653]">
@@ -129,6 +183,23 @@ export default function B2CHome() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
+          
+          {/* 1번째 (맨 왼쪽): 매트리스 / 패브릭 케어 */}
+          <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow space-y-4">
+            <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center font-bold">
+              <ShieldCheck className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-extrabold text-[#1E3653]">매트리스 / 패브릭 케어</h3>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              집먼지 진드기, 미세먼지 건식 추출 및 오염 자국 습식 딥클리닝
+            </p>
+            <ul className="text-xs text-slate-600 space-y-1.5 pt-2 border-t">
+              <li className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> 초강력 UV 진드기 케어</li>
+              <li className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> 얼룩 제거 및 항균 코팅</li>
+            </ul>
+          </div>
+
+          {/* 2번째 (중앙): 에어컨 분해 고압세척 */}
           <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow space-y-4">
             <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center font-bold">
               <Wind className="w-6 h-6" />
@@ -143,6 +214,7 @@ export default function B2CHome() {
             </ul>
           </div>
 
+          {/* 3번째 (우측): 세탁기 완전 분해세척 */}
           <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow space-y-4">
             <div className="w-12 h-12 bg-teal-50 text-teal-600 rounded-2xl flex items-center justify-center font-bold">
               <Zap className="w-6 h-6" />
@@ -157,19 +229,6 @@ export default function B2CHome() {
             </ul>
           </div>
 
-          <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow space-y-4">
-            <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center font-bold">
-              <ShieldCheck className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-extrabold text-[#1E3653]">매트리스 / 패브릭 케어</h3>
-            <p className="text-xs text-slate-500 leading-relaxed">
-              집먼지 진드기, 미세먼지 건식 추출 및 오염 자국 습식 딥클리닝
-            </p>
-            <ul className="text-xs text-slate-600 space-y-1.5 pt-2 border-t">
-              <li className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> 초강력 UV 진드기 케어</li>
-              <li className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> 얼룩 제거 및 항균 코팅</li>
-            </ul>
-          </div>
         </div>
       </section>
 
@@ -207,7 +266,7 @@ export default function B2CHome() {
         <div className="bg-white rounded-3xl shadow-xl border border-slate-200 p-6 sm:p-10 space-y-6">
           <div className="text-center space-y-2">
             <span className="text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">QUICK BOOKING</span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E3653]">무료 방문 견적 & 예약 신청</h2>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E3653]">방문 견적 & 예약 신청</h2>
             <p className="text-slate-500 text-xs sm:text-sm">정보를 남겨주시면 담당 엔지니어가 빠르게 안내해 드립니다.</p>
           </div>
 
@@ -245,9 +304,9 @@ export default function B2CHome() {
                   onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                   className="w-full p-3 rounded-xl border border-slate-300 focus:outline-none focus:border-[#1E3653] bg-white"
                 >
+                  <option value="매트리스/소파 케어">매트리스 / 소파 케어</option>
                   <option value="에어컨 분해청소">에어컨 분해청소 (벽걸이/스탠드/시스템)</option>
                   <option value="세탁기 완전분해">세탁기 완전분해 (통돌이/드럼)</option>
-                  <option value="매트리스/소파 케어">매트리스 / 소파 케어</option>
                   <option value="종합 홈케어 상담">종합 홈케어 상담</option>
                 </select>
               </div>
@@ -289,9 +348,9 @@ export default function B2CHome() {
         <div className="max-w-5xl mx-auto space-y-4 text-center sm:text-left">
           <div className="font-extrabold text-white text-base">BANFF CLEANING</div>
           <p className="leading-relaxed text-slate-400">
-            상호명: 밴프 클리닝 | 대표: 김승기 <br />
+            상호명: 밴프 클리닝 | 대표: 엄우준 <br />
             주소: 경기도 김포시 | 서비스 지역: 서울, 경기, 인천 수도권 전지역 <br />
-            고객센터: 카카오톡 1:1 상담 / 네이버 톡톡 지원
+            고객센터: 카카오톡 1:1 상담 / 네이버 톡톡 지원 / 네이버 블로그 운영
           </p>
           <div className="pt-2 text-slate-400 border-t border-slate-800 text-[11px]">
             © BANFF CLEANING. All rights reserved.
@@ -299,11 +358,10 @@ export default function B2CHome() {
         </div>
       </footer>
 
-      {/* 8. PC/태블릿 전용 우측 하단 고정 플로팅 버튼 (업로드된 이미지 디자인 반영) */}
+      {/* 8. PC/태블릿 전용 우측 하단 고정 플로팅 버튼 */}
       <div className="hidden sm:flex fixed bottom-6 right-6 z-50 flex-col gap-2.5 items-end">
-        {/* 카카오톡 1:1 상담 버튼 */}
         <a
-          href="http://pf.kakao.com/_KdxgrX"
+          href="https://pf.kakao.com"
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-2 px-5 py-3 bg-[#FEE500] text-[#191919] font-extrabold text-sm rounded-full shadow-lg hover:scale-105 transition-all border border-black/5"
@@ -312,9 +370,8 @@ export default function B2CHome() {
           <span>카카오톡 1:1 상담</span>
         </a>
 
-        {/* 네이버 톡톡 문의 버튼 */}
         <a
-          href="https://talk.naver.com/profile/wzb7nyu"
+          href="https://talk.naver.com"
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-2 px-5 py-3 bg-[#03CF5D] text-white font-extrabold text-sm rounded-full shadow-lg hover:scale-105 transition-all"
@@ -327,7 +384,7 @@ export default function B2CHome() {
       {/* 9. 스마트폰(모바일) 전용 하단 고정 바 */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-slate-200 p-2.5 sm:hidden flex items-center justify-between gap-2 shadow-2xl">
         <a
-          href="http://pf.kakao.com/_KdxgrX"
+          href="https://pf.kakao.com"
           target="_blank"
           rel="noreferrer"
           className="flex-1 py-2.5 bg-[#FEE500] text-[#191919] font-extrabold text-xs rounded-xl flex items-center justify-center gap-1 shadow-sm"
@@ -335,7 +392,7 @@ export default function B2CHome() {
           <MessageCircle className="w-4 h-4 fill-[#191919]" /> 카카오톡
         </a>
         <a
-          href="https://talk.naver.com/profile/wzb7nyu"
+          href="https://talk.naver.com"
           target="_blank"
           rel="noreferrer"
           className="flex-1 py-2.5 bg-[#03CF5D] text-white font-extrabold text-xs rounded-xl flex items-center justify-center gap-1 shadow-sm"
