@@ -165,7 +165,7 @@ export default function B2CHome() {
           {/* 상담 및 이동 버튼 모음 */}
           <div className="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-3">
             <a 
-              href="https://pf.kakao.com" 
+              href="https://pf.kakao.com/_KdxgrX" 
               target="_blank" 
               rel="noreferrer" 
               className="px-6 py-3.5 bg-[#FEE500] text-[#191919] font-extrabold rounded-xl shadow-2xl hover:scale-105 transition-all flex items-center gap-2 text-sm"
@@ -174,7 +174,7 @@ export default function B2CHome() {
               <span>카카오톡 예약·문의 ➔</span>
             </a>
             <a 
-              href="https://talk.naver.com" 
+              href="https://talk.naver.com/profile/wzb7nyu" 
               target="_blank" 
               rel="noreferrer" 
               className="px-6 py-3.5 bg-[#03CF5D] text-white font-extrabold rounded-xl shadow-2xl hover:scale-105 transition-all flex items-center gap-2 text-sm"
@@ -186,7 +186,7 @@ export default function B2CHome() {
               href="#services" 
               className="px-6 py-3.5 bg-black/40 backdrop-blur-md border border-white/30 text-white font-bold rounded-xl hover:bg-black/60 transition-all text-sm"
             >
-              서비스 살펴보기를 ↓
+              서비스 살펴보기↓
             </a>
           </div>
         </div>
@@ -390,8 +390,8 @@ export default function B2CHome() {
         <div className="max-w-5xl mx-auto space-y-4 text-center sm:text-left">
           <div className="font-extrabold text-white text-base">BANFF CLEANING</div>
           <p className="leading-relaxed text-slate-400">
-            상호명: 밴프 클리닝 | 대표: 엄우준 <br />
-            주소: 경기도 김포시 | 서비스 지역: 서울, 경기, 인천 수도권 전지역 <br />
+            상호명: 밴프 클리닝 | 대표: 김승기 <br />
+            주소: 서울특별시 강동구 | 서비스 지역: 서울, 경기, 인천 수도권 전지역 <br />
             고객센터: 카카오톡 1:1 상담 / 네이버 톡톡 지원 / 네이버 블로그 운영
           </p>
           <div className="pt-2 text-slate-400 border-t border-slate-800 text-[11px]">
@@ -403,7 +403,7 @@ export default function B2CHome() {
       {/* 8. PC/태블릿 전용 우측 하단 고정 플로팅 버튼 */}
       <div className="hidden sm:flex fixed bottom-6 right-6 z-50 flex-col gap-2.5 items-end">
         <a
-          href="https://pf.kakao.com"
+          href="https://pf.kakao.com/_KdxgrX"
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-2 px-5 py-3 bg-[#FEE500] text-[#191919] font-extrabold text-sm rounded-full shadow-lg hover:scale-105 transition-all border border-black/5"
@@ -413,7 +413,7 @@ export default function B2CHome() {
         </a>
 
         <a
-          href="https://talk.naver.com"
+          href="https://talk.naver.com/profile/wzb7nyu"
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-2 px-5 py-3 bg-[#03CF5D] text-white font-extrabold text-sm rounded-full shadow-lg hover:scale-105 transition-all"
@@ -426,7 +426,7 @@ export default function B2CHome() {
       {/* 9. 스마트폰(모바일) 전용 하단 고정 바 */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-slate-200 p-2.5 sm:hidden flex items-center justify-between gap-2 shadow-2xl">
         <a
-          href="https://pf.kakao.com"
+          href="https://pf.kakao.com/_KdxgrX"
           target="_blank"
           rel="noreferrer"
           className="flex-1 py-2.5 bg-[#FEE500] text-[#191919] font-extrabold text-xs rounded-xl flex items-center justify-center gap-1 shadow-sm"
@@ -434,7 +434,7 @@ export default function B2CHome() {
           <MessageCircle className="w-4 h-4 fill-[#191919]" /> 카카오톡
         </a>
         <a
-          href="https://talk.naver.com"
+          href="https://talk.naver.com/profile/wzb7nyu"
           target="_blank"
           rel="noreferrer"
           className="flex-1 py-2.5 bg-[#03CF5D] text-white font-extrabold text-xs rounded-xl flex items-center justify-center gap-1 shadow-sm"
