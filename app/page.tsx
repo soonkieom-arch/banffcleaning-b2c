@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   CheckCircle2, 
   MessageCircle, 
@@ -20,6 +20,20 @@ export default function B2CHome() {
     region: '서울/경기 전지역',
     memo: ''
   });
+
+  // 동영상 자동재생 강제 적용을 위한 Ref
+  const bgVideoRef = useRef<HTMLVideoElement>(null);
+  const fgVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // 모바일 브라우저 접속 시 즉시 동영상 재생 시도
+    if (bgVideoRef.current) {
+      bgVideoRef.current.play().catch(() => {});
+    }
+    if (fgVideoRef.current) {
+      fgVideoRef.current.play().catch(() => {});
+    }
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,15 +80,18 @@ export default function B2CHome() {
         </div>
       </header>
 
-      {/* 2. 히어로 섹션 (동영상 이중 블러 배경 레이아웃) */}
+      {/* 2. 히어로 섹션 (모바일 바로 재생 최적화 동영상) */}
       <section className="relative w-full h-[85vh] min-h-[600px] bg-slate-950 flex items-center justify-center overflow-hidden">
         
         {/* (1) 배경 layer: 블러 동영상 */}
         <video
+          ref={bgVideoRef}
           autoPlay
           loop
           muted
           playsInline
+          preload="auto"
+          poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
           className="absolute inset-0 w-full h-full object-cover filter blur-3xl opacity-40 scale-110 z-0"
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
@@ -83,14 +100,17 @@ export default function B2CHome() {
         {/* (2) 어두운 반투명 오버레이 */}
         <div className="absolute inset-0 bg-slate-950/50 z-10" />
 
-        {/* (3) 전면 layer: 원본 비율 동영상 */}
+        {/* (3) 전면 layer: 잘림 없는 원본 비율 동영상 */}
         <div className="absolute inset-0 z-10 flex items-center justify-center p-4">
-          <div className="h-full max-h-[520px] aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl border border-white/20">
+          <div className="h-full max-h-[520px] aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl border border-white/20 bg-slate-900">
             <video
+              ref={fgVideoRef}
               autoPlay
               loop
               muted
               playsInline
+              preload="auto"
+              poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
               className="w-full h-full object-cover"
             >
               <source src="/hero-bg.mp4" type="video/mp4" />
@@ -173,7 +193,7 @@ export default function B2CHome() {
         </div>
       </section>
 
-      {/* 4. 서비스 품목 (매트리스/패브릭 케어를 맨 왼쪽 첫 번째로 이동) */}
+      {/* 4. 서비스 품목 */}
       <section id="services" className="py-16 px-4 max-w-6xl mx-auto space-y-10">
         <div className="text-center space-y-2">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1E3653]">
@@ -183,8 +203,6 @@ export default function B2CHome() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          
-          {/* 1번째 (맨 왼쪽): 매트리스 / 패브릭 케어 */}
           <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow space-y-4">
             <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center font-bold">
               <ShieldCheck className="w-6 h-6" />
@@ -199,7 +217,6 @@ export default function B2CHome() {
             </ul>
           </div>
 
-          {/* 2번째 (중앙): 에어컨 분해 고압세척 */}
           <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow space-y-4">
             <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center font-bold">
               <Wind className="w-6 h-6" />
@@ -214,7 +231,6 @@ export default function B2CHome() {
             </ul>
           </div>
 
-          {/* 3번째 (우측): 세탁기 완전 분해세척 */}
           <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-md transition-shadow space-y-4">
             <div className="w-12 h-12 bg-teal-50 text-teal-600 rounded-2xl flex items-center justify-center font-bold">
               <Zap className="w-6 h-6" />
@@ -228,7 +244,6 @@ export default function B2CHome() {
               <li className="flex items-center gap-1.5"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> 배수관 및 고무패킹 케어</li>
             </ul>
           </div>
-
         </div>
       </section>
 
