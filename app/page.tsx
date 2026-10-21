@@ -79,7 +79,7 @@ export default function B2CHome() {
             
             {/* 네이버 블로그 메뉴 링크 */}
             <a 
-              href="https://blog.naver.com/본인_네이버_아이디" 
+              href="https://m.blog.naver.com/banffcleanning" 
               target="_blank" 
               rel="noreferrer" 
               className="hidden md:flex items-center gap-1 text-emerald-600 hover:text-emerald-700 transition-colors font-bold"
