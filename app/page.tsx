@@ -63,7 +63,7 @@ export default function B2CHome() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans relative">
       
-      {/* 1. 최상단 헤더 */}
+      {/* 1. 최상단 헤더 (모바일/PC 반응형 블로그 메뉴 반영) */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -73,22 +73,23 @@ export default function B2CHome() {
             </span>
           </div>
           
-          <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm font-semibold">
+          <div className="flex items-center gap-2.5 sm:gap-4 text-xs sm:text-sm font-semibold">
             <a href="#services" className="hover:text-[#1E3653] transition-colors hidden md:inline">서비스 안내</a>
             <a href="#process" className="hover:text-[#1E3653] transition-colors hidden md:inline">작업 공정</a>
             
-            {/* 네이버 블로그 메뉴 링크 */}
+            {/* 반응형 네이버 블로그 메뉴 링크 (모바일: '블로그', PC: '네이버 블로그') */}
             <a 
               href="https://m.blog.naver.com/banffcleanning" 
               target="_blank" 
               rel="noreferrer" 
-              className="hidden md:flex items-center gap-1 text-emerald-600 hover:text-emerald-700 transition-colors font-bold"
+              className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700 transition-colors font-bold px-1 py-1"
             >
               <BookOpen className="w-4 h-4" />
-              <span>네이버 블로그</span>
+              <span className="hidden sm:inline">네이버 블로그</span>
+              <span className="sm:hidden">블로그</span>
             </a>
 
-            <a href="#quote" className="bg-[#1E3653] text-white px-4 py-2 rounded-xl hover:bg-[#2a4a70] transition-all shadow-sm">
+            <a href="#quote" className="bg-[#1E3653] text-white px-3 py-2 sm:px-4 rounded-xl hover:bg-[#2a4a70] transition-all shadow-sm">
               방문견적 신청
             </a>
           </div>
